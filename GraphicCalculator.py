@@ -1,3 +1,4 @@
+#Importaciones
 import tkinter as tk
 from tkinter import ttk
 
@@ -5,7 +6,7 @@ class VonNeumannSimulatorWithGraphics:
     def __init__(self, master):
         self.master = master
         master.title("Simulador de Máquina de Von Neumann")
-        
+       
         self.memory = ['00000100', '01010101', '01100111', '01110000', '01001011', '01010101', '00000000', '00000000']
         self.program_counter = 0
         self.instruction_register = ''
@@ -13,7 +14,6 @@ class VonNeumannSimulatorWithGraphics:
         self.alu_result = '00000000'
         self.current_step = 0
         self.operation_complete = False
-
         self.create_widgets()
         self.apply_styles()
 
@@ -51,7 +51,7 @@ class VonNeumannSimulatorWithGraphics:
         # Controles
         self.next_button = ttk.Button(self.master, text="Siguiente Paso", command=self.next_step)
         self.next_button.grid(row=1, column=0, padx=10, pady=10)
-        
+       
         self.reset_button = ttk.Button(self.master, text="Reiniciar Simulación", command=self.reset_simulation)
         self.reset_button.grid(row=1, column=1, padx=10, pady=10)
 
@@ -75,7 +75,6 @@ class VonNeumannSimulatorWithGraphics:
         style.configure('TLabelFrame',
                         font=('Helvetica', 12, 'bold'),
                         padding=10)
-
         # Ajustar colores y bordes de los botones
         self.next_button.configure(style='TButton')
         self.reset_button.configure(style='TButton')
@@ -97,7 +96,6 @@ class VonNeumannSimulatorWithGraphics:
             rect = self.canvas.create_rectangle(50, 120 + i*30, 150, 150 + i*30, fill="white", outline="black")
             text = self.canvas.create_text(100, 135 + i*30, text=self.memory[i])
             self.memory_cells.append((rect, text))
-
         # Celda para la operación OR (ALU)
         self.alu_rect = self.canvas.create_rectangle(200, 120, 300, 170, fill="lightgreen", outline="black")
         self.canvas.create_text(250, 145, text="ALU (OR)")
@@ -134,7 +132,6 @@ class VonNeumannSimulatorWithGraphics:
         if self.operation_complete:
             self.status_label.config(text="La operación ya ha finalizado.")
             return
-        
         if self.current_step == 0:
             self.fetch()
         elif self.current_step == 1:
@@ -145,7 +142,6 @@ class VonNeumannSimulatorWithGraphics:
             self.store()
             self.operation_complete = True
             self.status_label.config(text="La operación ha finalizado.")
-        
         self.current_step = (self.current_step + 1) % 4
         self.update_display()
 
